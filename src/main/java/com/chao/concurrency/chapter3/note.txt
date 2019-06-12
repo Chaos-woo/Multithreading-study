@@ -1,0 +1,18 @@
+1. 创建线程对象Thread，默认有一个线程名，以Thread-开头，从0开始计数，而这个数字是线程安全的
+    private volatile int threadStatus = 0;
+    private static synchronized long nextThreadID() {
+        return ++threadSeqNumber;
+    }
+    如果是构造时命名就不会调用nextThreadID()
+    构造函数Thread()
+例如：Thread-0
+      Thread-1
+      Thread-2
+
+2.如果在构造Thread的时候没有传递Runnable或者没有覆写Thread的run()方法，该Thread将不会调用任何东西（因为传入的值为null），如果传递了Runnable接口的实例，或者覆写了Thread的run()方法，则会执行该方法的逻辑单元（逻辑代码）
+
+3.如果构造线程对象未传入ThreadGroup，Thread会默认获取父线程的ThreadGroup作为该线程的ThreadGroup，此时子线程和父线程会在同一个ThreadGroup中
+
+4.构造Thread的时候传入stackSize代表着该线程占用的stack大小，如果没有指定stackSize的大小，默认为0（0代表该参数会被忽略），该参数会被JNI函数去使用，需要注意的是，该参数高度依赖平台，在一些平台可能会无效。一般来说，stackSize越大，可创建的线程就会越少
+
+
