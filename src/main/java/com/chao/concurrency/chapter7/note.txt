@@ -1,0 +1,53 @@
+1.synchronized关键字的作用 参看Java基础中的内容
+
+2.假设一个类中有两个方法m1和m2同时被synchronized关键字修饰，那么两个线程t1和t2分别调用这两个方法时，当一个线程获得锁执行方法，另一个线程则无法获得锁去执行另一个方法，因为这两个被synchronized修饰的方法的锁是相同的，是this锁；即两个线程不能同时获得一把锁
+public class SynchronizedThis {
+	public static void main(String[] args) {
+		ThisLock lock = new ThisLock();
+		/**
+		 * 这里线程T1先获得了锁，执行了m1方法，
+		 * 之后线程T2才获得锁，执行m2方法
+		 */
+		new Thread(lock::m1,"T1").start();
+		new Thread(lock::m2,"T2").start();
+	}
+}
+
+class ThisLock{
+	public synchronized void m1(){
+		try {
+			System.out.println(Thread.currentThread().getName());
+			Thread.sleep(10_000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public synchronized void m2(){
+		try {
+			System.out.println(Thread.currentThread().getName());
+			Thread.sleep(10_000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+}
+
+3.假设synchronized修饰的是静态方法，那么此时的锁是属于类的静态锁，即类名.class，理由同上
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

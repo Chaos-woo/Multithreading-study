@@ -1,0 +1,62 @@
+1.线程使用interrupt()方法来中断线程，真正意思为给这个线程打上“中断”的标记，让这个线程能够被捕获中断异常InterruptedException
+
+2.Thread类中有成员方法isInterrupted()和静态方法Thread.interrupted()可以测试当前线程是否被中断，返回true或false；静态方法的interrupted()的底层同样是调用了isInterrupted()方法，而这样是为了适应不同的需求而存在的方法
+    public static boolean interrupted() {
+        return currentThread().isInterrupted(true);
+    }
+
+3.interrupted()方法可以中断join()方法，使用的时候，若是用其他线程来中断某个线程，那么中断时要判断正确的、需要被中断的线程，否则无法中断
+Thread t = new Thread(){
+			@Override
+			public void run() {
+				while (true){}
+			}
+		};
+
+		t.start();
+		Thread main = Thread.currentThread();
+		Thread t2 = new Thread(){
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
+				main.interrupt();
+				System.out.println("interrupt");
+			}
+		};
+
+		t2.start();
+
+		try {
+			t.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+4.结束线程的3种方法
+// TODO 根据chapter6的代码来写
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
