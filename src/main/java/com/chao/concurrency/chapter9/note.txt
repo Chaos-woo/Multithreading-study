@@ -1,0 +1,26 @@
+1.普通的单个生产者-单个消费者模型在代码实现时，使用wait()和notify()时无问题，但是使用相同的代码在多生产者-多消费者的情境下，可能会出现多个线程同时等待的情况，因为JVM的实现中，可能对notify()唤醒的是哪一个线程没有做出明确规定，就可能导致所有线程同时处于wait状态，无死锁程序却无法继续运行的情况就此产生
+
+2.某个线程调用wait()方法时，处于blocked状态的该线程放弃了它所持有的锁，直到其他线程使用notify()或notifyAll()时可能将其唤醒，那么它将重新持有这个锁，并且唤醒该线程的其他线程所持有的锁只应该是该线程的监管对象
+
+3.调用了wait()方法相当于wait(0)，0代表forever，直到其他线程将其唤醒，另一个方法是wait(long mills)，表示该线程在等待mills毫秒后，自己将被唤醒，处于runnable状态，等待CPU的资源使用
+
+4.wait()方法被建议在循环中使用
+synchronized (obj) {
+        while (&lt;condition does not hold&gt;)
+			obj.wait();
+            ... // Perform action appropriate to condition
+		}
+
+5.sleep()和wait()的区别
+	sleep()是Thread的方法，wait()是Object的方法
+	sleep()不会释放对象锁monitor(LOCK)，但是wait()会释放对象锁并且将这个对象放入等待队列
+	sleep()不需要依靠对象锁，但wait()需要
+	sleep()不需要被唤醒，而wait()需要
+
+
+
+
+
+
+
+
