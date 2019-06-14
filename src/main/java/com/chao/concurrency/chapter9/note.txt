@@ -16,11 +16,3 @@ synchronized (obj) {
 	sleep()不会释放对象锁monitor(LOCK)，但是wait()会释放对象锁并且将这个对象放入等待队列
 	sleep()不需要依靠对象锁，但wait()需要
 	sleep()不需要被唤醒，而wait()需要
-
-
-
-
-
-
-
-
