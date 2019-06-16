@@ -5,6 +5,10 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
+ * 1.实现了简单的线程池的创建、任务队列、
+ * 维护线程池中线程的状态、线程接受任务并执行
+ * 2.实现了简单的拒绝策略，线程池关闭
+ *
  * 增加自动扩充线程数量
  * 增加闲时自动回收
  */
@@ -118,7 +122,10 @@ public class SimpleThreadPool3 extends Thread {
 		}
 	}
 
-	// 提交任务
+	/**
+	 * 提交任务
+	 * @param runnable 任务
+	 */
 	public void submit(Runnable runnable) {
 		// 线程池被销毁不可再新增任务
 		if (destroy)
@@ -152,8 +159,15 @@ public class SimpleThreadPool3 extends Thread {
 		}
 	}
 
-	// 关闭指定剩余数量的其他线程
+	/**
+	 * 关闭线程池中的线程
+	 * @param threadCount 线程池中现有线程
+	 * @param remainingThread 关闭线程后应该剩下的线程
+	 */
 	private void closeThread(int threadCount, int remainingThread) {
+		if(threadCount < remainingThread)
+			return;
+
 		while (threadCount > remainingThread) {
 			for (Iterator<WorkThread> it = THREAD_QUEUE.iterator(); it.hasNext(); ) {
 				WorkThread t = it.next();
