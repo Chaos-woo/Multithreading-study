@@ -99,10 +99,10 @@ public class SimpleThreadPool3 extends Thread {
 						size++;
 					}
 				}
-			}else if(TASK_QUEUE.isEmpty() && (size > minThread)){
-				synchronized (THREAD_QUEUE){
+			} else if (TASK_QUEUE.isEmpty() && (size > minThread)) {
+				synchronized (THREAD_QUEUE) {
 					int threadCount = THREAD_QUEUE.size();
-					closeThread(threadCount,minThread);
+					closeThread(threadCount, minThread);
 				}
 			}
 
@@ -112,7 +112,7 @@ public class SimpleThreadPool3 extends Thread {
 				e.printStackTrace();
 			}
 			System.out.printf("min:%d, active:%d, max:%d, current:%d, size:%d,task_queue:%d", minThread, activeThread,
-					maxThread, THREAD_GROUP.activeCount(), size,TASK_QUEUE.size());
+					maxThread, THREAD_GROUP.activeCount(), size, TASK_QUEUE.size());
 			System.out.println();
 
 		}
@@ -143,19 +143,19 @@ public class SimpleThreadPool3 extends Thread {
 			Thread.sleep(50);
 		}
 		// 逐个关闭线程
-		synchronized (THREAD_QUEUE){
+		synchronized (THREAD_QUEUE) {
 			int threadCount = THREAD_QUEUE.size();
 			// 不断轮询所有线程，关闭线程
-			closeThread(threadCount,0);
+			closeThread(threadCount, 0);
 			destroy = true;
 			System.out.println("The Simple-Thread is shutdown");
 		}
 	}
 
 	// 关闭指定剩余数量的其他线程
-	private void closeThread(int threadCount,int remainingThread){
+	private void closeThread(int threadCount, int remainingThread) {
 		while (threadCount > remainingThread) {
-			for (Iterator<WorkThread> it = THREAD_QUEUE.iterator();it.hasNext();) {
+			for (Iterator<WorkThread> it = THREAD_QUEUE.iterator(); it.hasNext(); ) {
 				WorkThread t = it.next();
 				if ((threadCount > remainingThread) && (t.getTaskState() == TaskState.BLOCKED)) {
 					t.close();
