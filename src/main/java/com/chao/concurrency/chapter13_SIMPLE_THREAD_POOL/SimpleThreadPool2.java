@@ -5,10 +5,10 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
- * 增加拒绝策略
- * 当任务队列中等待的任务已经达到最大数，
- * 此时再提交任务则会抛出异常
+ * 1.实现了简单的线程池的创建、任务队列、
+ * 维护线程池中线程的状态、线程接受任务并执行
  *
+ * 增加拒绝策略
  * 增加线程池关闭
  */
 public class SimpleThreadPool2 {
