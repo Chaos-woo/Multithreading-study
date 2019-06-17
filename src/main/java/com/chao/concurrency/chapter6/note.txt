@@ -38,7 +38,6 @@ Thread t = new Thread(){
 		}
 
 4.结束线程的3种方法
-// TODO 根据chapter6的代码来写
 
 
 
