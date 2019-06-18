@@ -32,7 +32,7 @@ volatile的使用场景
 1.状态量标记
 volatile boolean start = true;
 while(start){
-	// todo
+	// ...
 }
 
 void close(){

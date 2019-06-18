@@ -1,0 +1,29 @@
+
+1. reading, other thread will enter to the waitset
+2. read write 锁分离
+
+
+规则：
+1. read read 并行化
+2. read write 不允许
+3. write write 不允许
+
+	是否进行串行化（加锁）处理[y/n?]
++-------------------------+
++      |READ  |   WRITE	  +
++-------------------------+
++ READ |  N   |     Y     +
++-------------------------+
++WRITE |  Y   |     Y     +
++-------------------------+
+
+
+
+
+
+
+
+
+
+
+
