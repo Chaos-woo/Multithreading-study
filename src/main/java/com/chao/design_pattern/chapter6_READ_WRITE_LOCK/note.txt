@@ -1,5 +1,5 @@
 
-1. reading, other thread will enter to the waitset
+1. reading, other thread will enter to the wait set
 2. read write 锁分离
 
 

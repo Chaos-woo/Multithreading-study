@@ -22,10 +22,7 @@ public class Subject {
 		this.status = status;
 		notifyAllObservers();
 	}
-
 	private void notifyAllObservers() {
 		observers.forEach(Observer::update);
 	}
-
-
 }

@@ -1,5 +1,6 @@
 package com.chao.design_pattern.chapter7_IMMUTABLE_DESIGN_PATTERN;
 
+import java.util.Collections;
 import java.util.stream.IntStream;
 
 public class ImmutableClient {

@@ -1,2 +1,65 @@
-1.不可变对象一定是线程安全的
+1.不可变对象一定是线程安全的，里面的任何属性或者引用类型的属性都不能被修改
 2.可变对象不一定是不安全的
+
+
+
+定义不可变对象的策略：
+1.不要设置“setter”方法
+2.让所有字段被final和private修饰
+3.不允许创建该不可变对象的类被继承（让类也被final修饰）
+4.如果实例对象中包含可变的对象引用，不要让它们被改变
+	4.1不提供改变这些可变对象的方法
+	4.2不要共享对可变对象的引用。如有必要，返回可变对象时，创建可变对象的副本，不要将可变对象本身返回
+	
+	
+可以通过以下步骤创建一个不可变对象类：
+1.所有字段设置为final private
+2.所有字段的初始化都依靠构造函数来进行
+3.ImmutableRGB类除了基本类型外，仅有一个String的引用类型，但String本身是不可变的（不需要额外的对可变对象引用的保护），如若有其他可变对象引用，那么需要增加保护措施
+4.ImmutableRGB类中没有设置setter，只有getter
+5.提供反转的invert()方法没有返回对象本身，而是返回了一个新的对象
+final public class ImmutableRGB {
+
+    // Values must be between 0 and 255.
+    final private int red;
+    final private int green;
+    final private int blue;
+    final private String name;
+
+    private void check(int red,
+                       int green,
+                       int blue) {
+        if (red < 0 || red > 255
+            || green < 0 || green > 255
+            || blue < 0 || blue > 255) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public ImmutableRGB(int red,
+                        int green,
+                        int blue,
+                        String name) {
+        check(red, green, blue);
+        this.red = red;
+        this.green = green;
+        this.blue = blue;
+        this.name = name;
+    }
+
+
+    public int getRGB() {
+        return ((red << 16) | (green << 8) | blue);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public ImmutableRGB invert() {
+        return new ImmutableRGB(255 - red,
+                       255 - green,
+                       255 - blue,
+                       "Inverse of " + name);
+    }
+}

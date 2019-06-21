@@ -1,4 +1,4 @@
-package com.chao.concurrency_basic.chapter10_SELF_LOCK;
+package com.chao.concurrency_basic.chapter10_CUSTOM_LOCK;
 
 import java.util.Optional;
 import java.util.stream.Stream;

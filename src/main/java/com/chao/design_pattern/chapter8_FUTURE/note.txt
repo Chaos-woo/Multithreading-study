@@ -1,0 +1,43 @@
+
+大概结构
+
+[(I)Future{get();}] <---impl---- [(C)AsynFuture{done(); get();}]
+	|
+	|
+(combination)
+	|
+	|
+[(C)FutureService{ Future submit(FutureTask);}]
+	|
+	|
+(combination)
+	|
+	|
+[(I)FutureTask{call();}]  
+
+
+
+总体思路：
+
+1.Future提供获取结果的接口get()；FutureTask提供放置任务的接口call()
+2.FutureService对外提供提交任务的Future submit(FutureTask)方法，该方法将上述两个接口桥接起来，调用该方法时使用一个线程t去完成任务，而立即返回结果对象task；
+3.线程t完成任务后，将对象task的结果设置为计算结果
+	3.1 在线程t完成任务之前，所有获取结果（调用get()）的线程将被阻塞，直到完成后将其唤醒获取结果；
+	3.2 若调用get()之前线程t已经完成任务，那么可以直接获取结果
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
