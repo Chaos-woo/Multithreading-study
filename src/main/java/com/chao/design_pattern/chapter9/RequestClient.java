@@ -17,7 +17,7 @@ public class RequestClient extends Thread{
 	public void run() {
 		int i=0;
 		while (i<100){
-			System.out.println("Client -> " + value);
+			System.out.println("ClientAndService -> " + value);
 			queue.pushRequest(new Request(value));
 			try {
 				Thread.sleep(random.nextInt(1000));

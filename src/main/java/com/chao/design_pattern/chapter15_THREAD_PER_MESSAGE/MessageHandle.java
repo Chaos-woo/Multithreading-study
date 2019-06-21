@@ -1,7 +1,6 @@
 package com.chao.design_pattern.chapter15_THREAD_PER_MESSAGE;
 
 import java.util.Random;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
