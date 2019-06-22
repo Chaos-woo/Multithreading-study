@@ -4,7 +4,6 @@ import java.util.Random;
 
 public class ConsumerThread extends Thread{
 	private MessageQueue queue;
-	private String name;
 
 	private static final Random random = new Random();
 
