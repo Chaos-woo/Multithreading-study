@@ -1,4 +1,4 @@
-package com.chao.design_pattern.chapter16_TWO_PHASE_TERMINATE;
+package com.chao.design_pattern.chapter16_TWO_PHASE_TERMINATE.test;
 
 public class ClientAndService {
 	public static void main(String[] args) throws InterruptedException {

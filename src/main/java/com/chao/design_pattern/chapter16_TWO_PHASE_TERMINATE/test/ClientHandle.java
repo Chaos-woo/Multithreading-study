@@ -1,4 +1,4 @@
-package com.chao.design_pattern.chapter16_TWO_PHASE_TERMINATE;
+package com.chao.design_pattern.chapter16_TWO_PHASE_TERMINATE.test;
 
 import java.io.*;
 import java.net.Socket;
