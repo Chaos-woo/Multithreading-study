@@ -38,6 +38,5 @@ public class Test3 {
 							.ifPresent(System.out::println);
 				}));
 
-
 	}
 }
